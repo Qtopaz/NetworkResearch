@@ -1,36 +1,38 @@
-# Remote Control – Anonymous SSH Network Scanner via Tor & SSH
+# Remote Control – Anonymous SSH Network Scanner
 
-**Remote Control** is a Bash-based automation tool that enables remote command execution and SSH scanning over a target network while maintaining anonymity via the Tor network. It leverages tools like `nipe`, `nmap`, `sshpass`, and `geoiplookup`.
+Remote Control is a Bash-based tool that automates anonymous SSH scanning and remote access using the Tor network. It leverages Nipe, Nmap, sshpass, and geoiplookup to provide stealthy scanning capabilities across internal networks.
 
 ---
 
 ## 🧰 Features
 
-- Automatically installs and sets up [nipe](https://github.com/htrgouvea/nipe) to route traffic through Tor
-- Verifies anonymity using `geoiplookup` and changes IP if required
-- Scans remote networks for open SSH ports using `nmap`
-- Connects via SSH using `sshpass` for password-based authentication
-- Anonymous execution from start to finish
+- Routes all traffic anonymously via the Tor network using `nipe`
+- Verifies non-Israeli (non-IL) IP using `geoiplookup` before proceeding
+- Prompts user for target IP, SSH username, and password
+- Scans entire /24 subnet for devices with port 22 open using `nmap`
+- Connects to remote targets using `sshpass` for automated SSH login
+- Ideal for internal lab simulations and Red Team automation
 
 ---
 
 ## 📦 Requirements
 
-Ensure you're running the script on a Debian-based system (e.g., Kali Linux) as root.
+Must run as **root** on a Debian-based system (e.g., Kali Linux).  
+The script will auto-install the following if not already present:
 
-The following tools are installed automatically if missing:
-- `nipe`
+- `nipe` (from GitHub)
 - `geoip-bin`
-- `curl`
 - `nmap`
+- `curl`
 - `sshpass`
-- `ssh`
-- Perl modules: `Try::Tiny`, `Config::Simple`, `JSON`
+- `perl`, plus Perl modules:
+  - `Try::Tiny`
+  - `Config::Simple`
+  - `JSON`
 
----
-
-## 🚀 Usage
+To manually install Perl modules:
 
 ```bash
-chmod +x remote_control.sh
-sudo ./remote_control.sh
+cpan Try::Tiny Config::Simple JSON
+
+
